@@ -1,8 +1,8 @@
 import React from 'react';
 import addons from '@storybook/addons';
-import * as pretty from 'pretty';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/styles/hljs';
+const pretty = require('pretty');
 
 const styles = {
   markupPanel: {

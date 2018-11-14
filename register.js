@@ -28,19 +28,15 @@ var _addons = require('@storybook/addons');
 
 var _addons2 = _interopRequireDefault(_addons);
 
-var _pretty = require('pretty');
-
-var pretty = _interopRequireWildcard(_pretty);
-
 var _reactSyntaxHighlighter = require('react-syntax-highlighter');
 
 var _reactSyntaxHighlighter2 = _interopRequireDefault(_reactSyntaxHighlighter);
 
 var _hljs = require('react-syntax-highlighter/dist/styles/hljs');
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var pretty = require('pretty');
 
 var styles = {
   markupPanel: {
