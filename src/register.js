@@ -1,11 +1,8 @@
 import React from 'react';
 import addons from '@storybook/addons';
 import * as pretty from 'pretty';
-
-import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
-import js from 'react-syntax-highlighter/languages/hljs/javascript';
-import docco from 'react-syntax-highlighter/dist/styles/hljs/docco';
-Light.registerLanguage('javascript', js);
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/styles/hljs';
 
 const styles = {
   markupPanel: {

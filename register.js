@@ -34,19 +34,13 @@ var pretty = _interopRequireWildcard(_pretty);
 
 var _reactSyntaxHighlighter = require('react-syntax-highlighter');
 
-var _javascript = require('react-syntax-highlighter/languages/hljs/javascript');
+var _reactSyntaxHighlighter2 = _interopRequireDefault(_reactSyntaxHighlighter);
 
-var _javascript2 = _interopRequireDefault(_javascript);
-
-var _docco = require('react-syntax-highlighter/dist/styles/hljs/docco');
-
-var _docco2 = _interopRequireDefault(_docco);
+var _hljs = require('react-syntax-highlighter/dist/styles/hljs');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Light.registerLanguage('javascript', _javascript2.default);
 
 var styles = {
   markupPanel: {
@@ -115,8 +109,8 @@ var StaticMarkup = function (_React$Component) {
           active = _props$active === undefined ? true : _props$active;
 
       return active ? _react2.default.createElement(
-        _reactSyntaxHighlighter.Light,
-        { language: 'html', style: _docco2.default },
+        _reactSyntaxHighlighter2.default,
+        { language: 'html', style: _hljs.docco },
         pretty(markup)
       ) : null;
     }
