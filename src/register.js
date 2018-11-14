@@ -2,6 +2,11 @@ import React from 'react';
 import addons from '@storybook/addons';
 import * as pretty from 'pretty';
 
+import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
+import js from 'react-syntax-highlighter/languages/hljs/javascript';
+import docco from 'react-syntax-highlighter/dist/styles/hljs/docco';
+Light.registerLanguage('javascript', js);
+
 const styles = {
   markupPanel: {
     margin: 10,
@@ -46,9 +51,9 @@ class StaticMarkup extends React.Component {
     // have active property.
     const { active = true } = this.props
     return active ? (
-      <div style={styles.markupPanel}>
-        { pretty(markup) }
-      </div>
+      <SyntaxHighlighter language='html' style={docco}>
+        {pretty(markup)}
+      </SyntaxHighlighter>
     ) : null;
   }
 
