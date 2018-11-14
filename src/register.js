@@ -1,5 +1,6 @@
 import React from 'react';
 import addons from '@storybook/addons';
+import * as pretty from 'pretty';
 
 const styles = {
   markupPanel: {
@@ -46,7 +47,7 @@ class StaticMarkup extends React.Component {
     const { active = true } = this.props
     return active ? (
       <div style={styles.markupPanel}>
-        { markup }
+        { pretty(markup) }
       </div>
     ) : null;
   }
