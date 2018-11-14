@@ -130,8 +130,9 @@ _addons2.default.register('evgenykochetkov/static-markup', function (api) {
   // Also need to set a unique name to the panel.
   _addons2.default.addPanel('evgenykochetkov/static-markup/panel', {
     title: 'Static Markup',
-    render: function render() {
-      return _react2.default.createElement(StaticMarkup, { channel: _addons2.default.getChannel(), api: api });
+    render: function render(_ref2) {
+      var active = _ref2.active;
+      return _react2.default.createElement(StaticMarkup, { channel: _addons2.default.getChannel(), api: api, active: active });
     }
   });
 });
