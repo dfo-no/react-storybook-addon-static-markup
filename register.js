@@ -89,13 +89,18 @@ var StaticMarkup = function (_React$Component) {
     key: 'render',
     value: function render() {
       var markup = this.state.markup;
+      // setting it to true to support past
+      // versions of storybook, which might not
+      // have active property.
 
+      var _props$active = this.props.active,
+          active = _props$active === undefined ? true : _props$active;
 
-      return _react2.default.createElement(
+      return active ? _react2.default.createElement(
         'div',
         { style: styles.markupPanel },
         markup
-      );
+      ) : null;
     }
 
     // This is some cleanup tasks when the StaticMarkup panel is unmounting.

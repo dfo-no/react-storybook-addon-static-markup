@@ -40,12 +40,15 @@ class StaticMarkup extends React.Component {
 
   render() {
     const { markup } = this.state;
-
-    return (
+    // setting it to true to support past
+    // versions of storybook, which might not
+    // have active property.
+    const { active = true } = this.props
+    return active ? (
       <div style={styles.markupPanel}>
         { markup }
       </div>
-    );
+    ) : null;
   }
 
   // This is some cleanup tasks when the StaticMarkup panel is unmounting.
