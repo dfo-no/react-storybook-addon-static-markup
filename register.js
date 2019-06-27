@@ -28,6 +28,8 @@ var _addons = require('@storybook/addons');
 
 var _addons2 = _interopRequireDefault(_addons);
 
+var _coreEvents = require('@storybook/core-events');
+
 var _reactSyntaxHighlighter = require('react-syntax-highlighter');
 
 var _reactSyntaxHighlighter2 = _interopRequireDefault(_reactSyntaxHighlighter);
@@ -89,7 +91,7 @@ var StaticMarkup = function (_React$Component) {
       channel.on('evgenykochetkov/static-markup/show-markup', this.onShowStaticMarkup);
 
       // Clear the current state on every story change.
-      this.stopListeningOnStory = api.onStory(function () {
+      this.stopListeningOnStory = api.on(_coreEvents.STORY_CHANGED, function () {
         _this2.onShowStaticMarkup('');
       });
     }

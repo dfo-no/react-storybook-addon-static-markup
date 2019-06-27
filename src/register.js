@@ -1,5 +1,6 @@
 import React from 'react';
 import addons from '@storybook/addons';
+import { STORY_CHANGED } from '@storybook/core-events';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/styles/hljs';
 const pretty = require('pretty');
@@ -36,7 +37,7 @@ class StaticMarkup extends React.Component {
     channel.on('evgenykochetkov/static-markup/show-markup', this.onShowStaticMarkup);
 
     // Clear the current state on every story change.
-    this.stopListeningOnStory = api.onStory(() => {
+    this.stopListeningOnStory = api.on(STORY_CHANGED, () => {
       this.onShowStaticMarkup('');
     });
   }
