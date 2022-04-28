@@ -14,7 +14,19 @@ Install the package:
 npm i -D react-storybook-addon-static-markup
 ```
 
-Then set the addon in your `.storybook/config.js`:
+Then set the addon in your `.storybook/main.js`:
+
+```js
+module.exports = {
+    ...
+    addons: [
+        ...
+        'react-storybook-addon-static-markup/register',
+    ],
+}
+```
+
+and set the addon in your `.storybook/preview.js`:
 
 ```js
 import { configure, setAddon } from '@storybook/react'
@@ -23,14 +35,8 @@ import staticMarkup from 'react-storybook-addon-static-markup'
 
 setAddon(staticMarkup)
 
-configure(() => {
-  // ...
-}, module)
-```
+require("./stories.index");
 
-...and register it in your `.storybook/addons.js`:
-```js
-import 'react-storybook-addon-static-markup/register';
 ```
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import addons from '@storybook/addons';
 import { STORY_CHANGED } from '@storybook/core-events';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/styles/hljs';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 const pretty = require('pretty');
 
 const styles = {

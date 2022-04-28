@@ -1,81 +1,65 @@
-'use strict';
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ShowStaticMarkup = undefined;
+exports["default"] = exports.ShowStaticMarkup = void 0;
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireDefault(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _addons = _interopRequireDefault(require("@storybook/addons"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _pretty = _interopRequireDefault(require("pretty"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _server = _interopRequireDefault(require("react-dom/server"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 
-var _react = require('react');
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
-var _react2 = _interopRequireDefault(_react);
+var ShowStaticMarkup = /*#__PURE__*/function (_React$Component) {
+  (0, _inherits2["default"])(ShowStaticMarkup, _React$Component);
 
-var _addons = require('@storybook/addons');
-
-var _addons2 = _interopRequireDefault(_addons);
-
-var _pretty = require('pretty');
-
-var _pretty2 = _interopRequireDefault(_pretty);
-
-var _server = require('react-dom/server');
-
-var _server2 = _interopRequireDefault(_server);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ShowStaticMarkup = exports.ShowStaticMarkup = function (_React$Component) {
-  (0, _inherits3.default)(ShowStaticMarkup, _React$Component);
+  var _super = _createSuper(ShowStaticMarkup);
 
   function ShowStaticMarkup() {
-    (0, _classCallCheck3.default)(this, ShowStaticMarkup);
-    return (0, _possibleConstructorReturn3.default)(this, (ShowStaticMarkup.__proto__ || (0, _getPrototypeOf2.default)(ShowStaticMarkup)).apply(this, arguments));
+    (0, _classCallCheck2["default"])(this, ShowStaticMarkup);
+    return _super.apply(this, arguments);
   }
 
-  (0, _createClass3.default)(ShowStaticMarkup, [{
-    key: 'render',
+  (0, _createClass2["default"])(ShowStaticMarkup, [{
+    key: "render",
     value: function render() {
       var children = this.props.children;
+      var markup = (0, _pretty["default"])(_server["default"].renderToStaticMarkup(children));
 
+      var channel = _addons["default"].getChannel();
 
-      var markup = (0, _pretty2.default)(_server2.default.renderToStaticMarkup(children));
-
-      var channel = _addons2.default.getChannel();
       channel.emit('evgenykochetkov/static-markup/show-markup', markup);
-
       return children;
     }
   }]);
   return ShowStaticMarkup;
-}(_react2.default.Component);
+}(_react["default"].Component);
 
-exports.default = {
+exports.ShowStaticMarkup = ShowStaticMarkup;
+var _default = {
   addWithStaticMarkup: function addWithStaticMarkup(storyName, story) {
     this.add(storyName, function () {
-      return _react2.default.createElement(
-        ShowStaticMarkup,
-        null,
-        story()
-      );
+      return /*#__PURE__*/_react["default"].createElement(ShowStaticMarkup, null, story());
     });
   }
 };
+exports["default"] = _default;

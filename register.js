@@ -1,42 +1,32 @@
-'use strict';
+"use strict";
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _react = _interopRequireDefault(require("react"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _addons = _interopRequireDefault(require("@storybook/addons"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _coreEvents = require("@storybook/core-events");
 
-var _react = require('react');
+var _reactSyntaxHighlighter = _interopRequireDefault(require("react-syntax-highlighter"));
 
-var _react2 = _interopRequireDefault(_react);
+var _hljs = require("react-syntax-highlighter/dist/esm/styles/hljs");
 
-var _addons = require('@storybook/addons');
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 
-var _addons2 = _interopRequireDefault(_addons);
-
-var _coreEvents = require('@storybook/core-events');
-
-var _reactSyntaxHighlighter = require('react-syntax-highlighter');
-
-var _reactSyntaxHighlighter2 = _interopRequireDefault(_reactSyntaxHighlighter);
-
-var _hljs = require('react-syntax-highlighter/dist/styles/hljs');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 var pretty = require('pretty');
 
@@ -52,97 +42,93 @@ var styles = {
   }
 };
 
-var StaticMarkup = function (_React$Component) {
-  (0, _inherits3.default)(StaticMarkup, _React$Component);
+var StaticMarkup = /*#__PURE__*/function (_React$Component) {
+  (0, _inherits2["default"])(StaticMarkup, _React$Component);
+
+  var _super = _createSuper(StaticMarkup);
 
   function StaticMarkup() {
-    var _ref;
+    var _this;
 
-    (0, _classCallCheck3.default)(this, StaticMarkup);
+    (0, _classCallCheck2["default"])(this, StaticMarkup);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (_ref = StaticMarkup.__proto__ || (0, _getPrototypeOf2.default)(StaticMarkup)).call.apply(_ref, [this].concat(args)));
-
+    _this = _super.call.apply(_super, [this].concat(args));
     _this.state = {
       markup: ''
     };
-
-    _this.onShowStaticMarkup = _this.onShowStaticMarkup.bind(_this);
+    _this.onShowStaticMarkup = _this.onShowStaticMarkup.bind((0, _assertThisInitialized2["default"])(_this));
     return _this;
   }
 
-  (0, _createClass3.default)(StaticMarkup, [{
-    key: 'onShowStaticMarkup',
+  (0, _createClass2["default"])(StaticMarkup, [{
+    key: "onShowStaticMarkup",
     value: function onShowStaticMarkup(markup) {
-      this.setState({ markup: markup });
+      this.setState({
+        markup: markup
+      });
     }
   }, {
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
 
-      var _props = this.props,
-          channel = _props.channel,
-          api = _props.api;
+      var _this$props = this.props,
+          channel = _this$props.channel,
+          api = _this$props.api;
+      channel.on('evgenykochetkov/static-markup/show-markup', this.onShowStaticMarkup); // Clear the current state on every story change.
 
-      channel.on('evgenykochetkov/static-markup/show-markup', this.onShowStaticMarkup);
-
-      // Clear the current state on every story change.
       this.stopListeningOnStory = api.on(_coreEvents.STORY_CHANGED, function () {
         _this2.onShowStaticMarkup('');
       });
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      var markup = this.state.markup;
-      // setting it to true to support past
+      var markup = this.state.markup; // setting it to true to support past
       // versions of storybook, which might not
       // have active property.
 
-      var _props$active = this.props.active,
-          active = _props$active === undefined ? true : _props$active;
-
-      return active ? _react2.default.createElement(
-        _reactSyntaxHighlighter2.default,
-        { language: 'html', style: _hljs.docco },
-        pretty(markup)
-      ) : null;
-    }
-
-    // This is some cleanup tasks when the StaticMarkup panel is unmounting.
+      var _this$props$active = this.props.active,
+          active = _this$props$active === void 0 ? true : _this$props$active;
+      return active ? /*#__PURE__*/_react["default"].createElement(_reactSyntaxHighlighter["default"], {
+        language: "html",
+        style: _hljs.docco
+      }, pretty(markup)) : null;
+    } // This is some cleanup tasks when the StaticMarkup panel is unmounting.
 
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
       if (this.stopListeningOnStory) {
         this.stopListeningOnStory();
       }
 
       this.unmounted = true;
-      var _props2 = this.props,
-          channel = _props2.channel,
-          api = _props2.api;
-
+      var _this$props2 = this.props,
+          channel = _this$props2.channel,
+          api = _this$props2.api;
       channel.removeListener('evgenykochetkov/static-markup/show-markup', this.onShowStaticMarkup);
     }
   }]);
   return StaticMarkup;
-}(_react2.default.Component);
-
-// Register the addon with a unique name.
+}(_react["default"].Component); // Register the addon with a unique name.
 
 
-_addons2.default.register('evgenykochetkov/static-markup', function (api) {
+_addons["default"].register('evgenykochetkov/static-markup', function (api) {
   // Also need to set a unique name to the panel.
-  _addons2.default.addPanel('evgenykochetkov/static-markup/panel', {
+  _addons["default"].addPanel('evgenykochetkov/static-markup/panel', {
     title: 'Static Markup',
-    render: function render(_ref2) {
-      var active = _ref2.active;
-      return _react2.default.createElement(StaticMarkup, { channel: _addons2.default.getChannel(), api: api, active: active });
+    render: function render(_ref) {
+      var active = _ref.active;
+      return /*#__PURE__*/_react["default"].createElement(StaticMarkup, {
+        channel: _addons["default"].getChannel(),
+        api: api,
+        active: active
+      });
     }
   });
 });
